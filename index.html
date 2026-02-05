@@ -1,0 +1,495 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Blue Jay Pictures - Professional Photography</title><link rel="icon" type="image/png" href="assets/IMG_4433.PNG"><script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css"><style>* {
+            scroll-behavior: smooth;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
+            }
+        }
+
+        @keyframes counter {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-slide-in {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .animate-counter {
+            animation: counter 0.5s ease-out;
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+
+        .dark-mode {
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+
+        .dark-mode .card {
+            background-color: #1e293b;
+            border-color: #334155;
+        }
+
+        .carousel-slide {
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .scroll-trigger {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-trigger.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-link:hover {
+            color: #3b82f6;
+            transition: color 0.3s ease;
+        }
+
+        .btn-primary {
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .portfolio-item {
+            overflow: hidden;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .portfolio-item img {
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 2rem 1rem 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+
+        /* Brand logo sizing (user-specified) */
+        .brand-logo {
+            object-fit: cover;
+            width: 287px;
+            height: 40px;
+            transition: all 0.3s ease;
+            animation: logoFadeIn 1s ease-out;
+        }
+
+         @keyframes logoFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Logo hover effect */
+        .brand-logo:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+            cursor: pointer;
+        }
+
+
+        /* Use Playfair Display site-wide */
+        body { font-family: 'Playfair Display', serif; }
+
+        /* Navbar link colors: white when overlaying hero, brand-blue when fixed */
+        #navbar.absolute .nav-link { color: #ffffff; }
+        #navbar.fixed .nav-link { color: rgb(37 99 235); }
+        #navbar .nav-link { transition: color 0.25s ease; }
+
+        /* Stats / counter styles */
+        .stat-icon {
+            width: 76px;
+            height: 76px;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.02);
+            margin: 0 auto;
+            transition: transform 320ms cubic-bezier(.2,.9,.2,1), box-shadow 320ms ease, background 320ms ease;
+        }
+
+        .stat-icon i { color: #fff; font-size: 22px; }
+
+        .count { display: inline-block; transition: transform 200ms ease; font-variant-numeric: tabular-nums; }
+        .plus { margin-left: 2px; font-size: 0.6em; color: rgba(255,255,255,0.9); vertical-align: super; }
+
+        @keyframes popScale {
+            0% { transform: scale(0.8); opacity: 0; }
+            60% { transform: scale(1.12); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .animate-counter {
+            animation: popScale 480ms cubic-bezier(.2,.9,.2,1) both;
+        }
+
+        /* When stat container becomes active (scrolled into view) make icon pop */
+        .scroll-trigger.active .stat-icon {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+            background: rgba(255,255,255,0.03);
+        }
+         /* Lightbox2 Custom Styling */
+        .lightbox {
+            font-family: 'Playfair Display', serif !important;
+        }
+
+       
+        
+        .lb-data .lb-caption {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        
+        .lb-data .lb-number {
+            color: #e2e8f0;
+        }
+        
+        .lb-nav a.lb-prev,
+        .lb-nav a.lb-next {
+            opacity: 1 !important;
+        }
+        
+        .lb-nav a.lb-prev:hover,
+        .lb-nav a.lb-next:hover {
+            opacity: 0.8 !important;
+        }</style><script defer="defer" src="bundle.js"></script></head><body class="bg-white text-gray-900"><nav class="absolute top-0 left-0 right-0 z-50 bg-transparent transition-colors duration-300" id="navbar"><div class="container mx-auto px-6 py-4 flex justify-between items-center"><div class="flex items-center gap-2"><img src="assets/IMG_4436.PNG" alt="Blue Jay Pictures Logo" class="brand-logo"></div><div class="hidden md:flex gap-8 ml-auto mr-12"><a href="#about" class="nav-link font-semibold">About</a> <a href="#videos" class="nav-link font-semibold">Films</a> <a href="#portfolio" class="nav-link font-semibold">Photography</a> <a href="#contact" class="nav-link font-semibold">Get in Touch</a></div><div class="flex items-center gap-4"><button id="mobileMenuBtn" class="md:hidden p-2"><i class="fas fa-bars text-xl"></i></button></div></div><div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-200"><div class="flex flex-col gap-4 p-6"><a href="#about" class="font-semibold hover:text-blue-600">About</a> <a href="#videos" class="font-semibold hover:text-blue-600">Films</a> <a href="#portfolio" class="font-semibold hover:text-blue-600">Photography</a> <a href="#contact" class="font-semibold hover:text-blue-600">Contact</a></div></div></nav><section id="hero" class="relative h-screen bg-gradient-to-br from-blue-50 to-blue-100 overflow-hidden"><div class="absolute inset-0"><video id="heroVideo" class="w-full h-full object-cover" src="assets/heroviedio.MOV" autoplay muted playsinline loop preload="metadata"></video><div class="absolute inset-0 bg-black bg-opacity-40"></div></div><div class="relative h-full flex flex-col justify-center items-center text-center text-white px-6 z-10"><h1 class="text-6xl md:text-6xl mb-6 animate-fade-in-up font-bold">Capturing <span class="text-blue-300">Moments</span>, Creating <span class="text-blue-300">Memories</span></h1><p class="text-xl md:text-2xl mb-8 animate-fade-in-up" style="animation-delay: 0.2s;">Professional photography services for events, portraits, sports, and more</p></div></section><section id="stats" class="py-20 text-white" style="background-color: #4a94ec;"><div class="container mx-auto px-6"><h2 class="text-center mb-4 text-lg scroll-trigger">Experience</h2><p class="text-4xl md:text-5xl text-center text-blue-100 mb-12 scroll-trigger">Numbers Tell Stories</p><div class="grid grid-cols-1 md:grid-cols-3 gap-8"><div class="text-center scroll-trigger" style="animation-delay: 0s;"><div class="stat-icon text-4xl mb-3 text-white"><i class="fas fa-briefcase"></i></div><div class="text-5xl mb-2 counter" data-target="5"><span class="count">0</span><span class="plus">+</span></div><p class="text-xl text-blue-100">Years Experience</p></div><div class="text-center scroll-trigger" style="animation-delay: 0.1s;"><div class="stat-icon text-4xl mb-3 text-white"><i class="fas fa-camera-retro"></i></div><div class="text-5xl mb-2 counter" data-target="200"><span class="count">0</span><span class="plus">+</span></div><p class="text-xl text-blue-100">Project Delivered</p></div><div class="text-center scroll-trigger" style="animation-delay: 0.2s;"><div class="stat-icon text-4xl mb-3 text-white"><i class="fas fa-smile"></i></div><div class="text-5xl mb-2 counter" data-target="150"><span class="count">0</span><span class="plus">+</span></div><p class="text-xl text-blue-100">Happy Clients</p></div></div></div></section><section id="portfolio" class="py-20 bg-gray-50"><div class="container mx-auto px-6"><h2 class="text-4xl md:text-5xl font-bold text-center mb-6 scroll-trigger">Photography Portfolio</h2><p class="text-center text-gray-600 mb-12 text-lg scroll-trigger">Explore our diverse collection of professional work</p><div class="flex flex-wrap justify-center gap-4 mb-8 scroll-trigger"><button class="filter-btn px-6 py-2 rounded-full bg-blue-600 text-white font-semibold" data-filter="events">Events</button> <button class="filter-btn px-6 py-2 rounded-full bg-white text-gray-800 border-2 border-blue-600 font-semibold hover:bg-blue-50" data-filter="wedding">Weddings</button> <button class="filter-btn px-6 py-2 rounded-full bg-white text-gray-800 border-2 border-blue-600 font-semibold hover:bg-blue-50" data-filter="food">Food</button> <button class="filter-btn px-6 py-2 rounded-full bg-white text-gray-800 border-2 border-blue-600 font-semibold hover:bg-blue-50" data-filter="sports">Sports</button></div><div id="portfolioSubCategories" class="grid grid-cols-1 md:grid-cols-3 gap-6"><div class="subcategory-card portfolio-item-events scroll-trigger cursor-pointer" data-subcategory="corporate-headshots"><div class="relative overflow-hidden rounded-xl shadow-lg group"><img src="assets/headshots/IDENTISCENTS8843.jpg" alt="Corporate Headshots" class="w-full object-cover transition-transform duration-300 group-hover:scale-110" style="height: 520px;"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div><div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-lg"><i class="fas fa-folder-open text-black-600"></i></div><div class="absolute bottom-0 left-0 right-0 p-6"><h3 class="text-white text-2xl font-bold mb-2">Corporate Headshots</h3><div class="flex items-center gap-2 text-white/90"><i class="fas fa-images"></i> <span class="text-sm">View Gallery</span> <i class="fas fa-arrow-right ml-auto group-hover:translate-x-1 transition-transform"></i></div></div></div></div><div class="subcategory-card portfolio-item-events scroll-trigger cursor-pointer" data-subcategory="burjeel-headshots"><div class="relative overflow-hidden rounded-xl shadow-lg group"><img src="assets/events/DOC-20240528-WA0005.-images-1.jpg" alt="Burjeel Headshots" class="w-full object-cover transition-transform duration-300 group-hover:scale-110" style="height: 520px;"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div><div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg p-3 shadow-lg"><i class="fas fa-folder-open text-black-600"></i></div><div class="absolute bottom-0 left-0 right-0 p-6"><h3 class="text-white text-2xl font-bold mb-2">Burjeel Headshots</h3><div class="flex items-center gap-2 text-white/90"><i class="fas fa-images"></i> <span class="text-sm">View Gallery</span> <i class="fas fa-arrow-right ml-auto group-hover:translate-x-1 transition-transform"></i></div></div></div></div></div><div id="backButton" class="hidden mt-8 text-end"><button class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition mb-2"><i class="fas fa-arrow-left"></i> Back to Categories</button></div><div id="portfolioPhotos" class="hidden grid grid-cols-1 md:grid-cols-3 gap-6"><div class="photo-item photo-corporate-headshots scroll-trigger"><a href="assets/headshots/IDENTISCENTS6918.jpg" data-lightbox="corporate-headshots" data-title="Corporate Event Photography"><img src="assets/headshots/IDENTISCENTS6918.jpg" alt="Corporate Event" class="w-full h-82 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item photo-corporate-headshots scroll-trigger"><a href="assets/headshots/IDENTISCENTS6972.jpg" data-lightbox="corporate-headshots" data-title="Corporate Event Photography"><img src="assets/headshots/IDENTISCENTS6972.jpg" alt="Corporate Event" class="w-full h-82 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item photo-corporate-headshots scroll-trigger"><a href="assets/headshots/IDENTISCENTS7021.jpg" data-lightbox="corporate-headshots" data-title="Corporate Event Photography"><img src="assets/headshots/IDENTISCENTS7021.jpg" alt="Corporate Event" class="w-full h-82 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item photo-corporate-headshots scroll-trigger"><a href="assets/headshots/IDENTISCENTS8843.jpg" data-lightbox="corporate-headshots" data-title="Corporate Event Photography"><img src="assets/headshots/IDENTISCENTS8843.jpg" alt="Corporate Event" class="w-full h-82 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item photo-burjeel-headshots scroll-trigger"><a href="assets/events/DOC-20240528-WA0005.-images-1.jpg" data-lightbox="burjeel-headshots" data-title="Burjeel Event Photography"><img src="assets/events/DOC-20240528-WA0005.-images-1.jpg" alt="Burjeel Event" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item photo-burjeel-headshots scroll-trigger"><a href="assets/events/DOC-20240528-WA0005.-images-4.jpg" data-lightbox="burjeel-headshots" data-title="Burjeel Event Photography"><img src="assets/events/DOC-20240528-WA0005.-images-4.jpg" alt="Burjeel Event" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item photo-burjeel-headshots scroll-trigger"><a href="assets/events/DOC-20240528-WA0005.-images-6.jpg" data-lightbox="burjeel-headshots" data-title="Burjeel Event Photography"><img src="assets/events/DOC-20240528-WA0005.-images-6.jpg" alt="Burjeel Event" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item photo-burjeel-headshots scroll-trigger"><a href="assets/events/DOC-20240528-WA0005.-images-9.jpg" data-lightbox="burjeel-headshots" data-title="Burjeel Event Photography"><img src="assets/events/DOC-20240528-WA0005.-images-9.jpg" alt="Burjeel Event" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item photo-burjeel-headshots scroll-trigger"><a href="assets/events/DOC-20240528-WA0005.-images-10.jpg" data-lightbox="burjeel-headshots" data-title="Burjeel Event Photography"><img src="assets/events/DOC-20240528-WA0005.-images-10.jpg" alt="Burjeel Event" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item photo-burjeel-headshots scroll-trigger"><a href="assets/events/DOC-20240528-WA0005.-images-12.jpg" data-lightbox="burjeel-headshots" data-title="Burjeel Event Photography"><img src="assets/events/DOC-20240528-WA0005.-images-12.jpg" alt="Burjeel Event" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item portfolio-item-food scroll-trigger"><a href="assets/foods/C01.jpg" data-lightbox="food" data-title="Food Photography"><img src="assets/foods/C01.jpg" alt="Food" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item portfolio-item-food scroll-trigger"><a href="assets/foods/M0.jpg" data-lightbox="food" data-title="Food Photography"><img src="assets/foods/M0.jpg" alt="Food" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item portfolio-item-food scroll-trigger"><a href="assets/foods/M7.jpg" data-lightbox="food" data-title="Food Photography"><img src="assets/foods/M7.jpg" alt="Food" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item portfolio-item-food scroll-trigger"><a href="assets/foods/G3.jpg" data-lightbox="food" data-title="Food Photography"><img src="assets/foods/G3.jpg" alt="Food" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item portfolio-item-wedding scroll-trigger"><a href="assets/weddings/IMG-20260204-WA0004.jpg" data-lightbox="weddings" data-title="Wedding Photography"><img src="assets/weddings/IMG-20260204-WA0004.jpg" alt="wedding" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item portfolio-item-wedding scroll-trigger"><a href="assets/weddings/IMG-20260204-WA0012.jpg" data-lightbox="weddings" data-title="Wedding Photography"><img src="assets/weddings/IMG-20260204-WA0012.jpg" alt="wedding" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item portfolio-item-wedding scroll-trigger"><a href="assets/weddings/IMG-20260204-WA0016.jpg" data-lightbox="weddings" data-title="Wedding Photography"><img src="assets/weddings/IMG-20260204-WA0016.jpg" alt="wedding" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item portfolio-item-wedding scroll-trigger"><a href="assets/weddings/IMG-20260204-WA0018.jpg" data-lightbox="weddings" data-title="Wedding Photography"><img src="assets/weddings/IMG-20260204-WA0018.jpg" alt="wedding" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item portfolio-item-wedding scroll-trigger"><a href="assets/weddings/IMG-20260204-WA0031.jpg" data-lightbox="weddings" data-title="Wedding Photography"><img src="assets/weddings/IMG-20260204-WA0031.jpg" alt="wedding" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item portfolio-item-wedding scroll-trigger"><a href="assets/weddings/IMG-20260204-WA0034.jpg" data-lightbox="weddings" data-title="Wedding Photography"><img src="assets/weddings/IMG-20260204-WA0034.jpg" alt="wedding" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item portfolio-item-wedding scroll-trigger"><a href="assets/weddings/IMG-20260204-WA0058.jpg" data-lightbox="weddings" data-title="Wedding Photography"><img src="assets/weddings/IMG-20260204-WA0058.jpg" alt="wedding" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item portfolio-item-wedding scroll-trigger"><a href="assets/weddings/IMG-20260204-WA0070.jpg" data-lightbox="weddings" data-title="Wedding Photography"><img src="assets/weddings/IMG-20260204-WA0070.jpg" alt="wedding" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item portfolio-item-sports scroll-trigger"><a href="assets/sports/IMG_0215.JPG" data-lightbox="sports" data-title="Sports Action Shot"><img src="assets/sports/IMG_0215.JPG" alt="Sports" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item portfolio-item-sports scroll-trigger"><a href="assets/sports/K7405022.jpg" data-lightbox="sports" data-title="Sports Action Shot"><img src="assets/sports/K7405022.jpg" alt="Sports" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div><div class="photo-item portfolio-item-sports scroll-trigger"><a href="assets/sports/K7405162.jpg" data-lightbox="sports" data-title="Sports Action Shot"><img src="assets/sports/K7405162.jpg" alt="Sports" class="w-full h-80 object-cover rounded-xl cursor-pointer hover:opacity-90 transition"></a></div></div></div></section><section id="videos" class="py-20 bg-white"><div class="container mx-auto px-6"><h2 class="text-4xl md:text-5xl font-bold text-center mb-6 scroll-trigger">Video Showcase</h2><p class="text-center text-gray-600 mb-12 text-lg scroll-trigger">Watch highlights from our most memorable projects</p><div class="video-grid"><div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg scroll-trigger hover:shadow-2xl transition-shadow"><video class="w-full h-64 object-cover" controls><source src="assets/events/Google-Cloud-AI-Labs-Event_Media_6KIQ5de-u5o_001_1080p.mp4" type="video/mp4">Your browser does not support the video tag.</video><div class="p-6"><h3 class="text-xl font-bold text-gray-800">Google Cloud AI Labs Event</h3><p class="text-gray-600 mt-2">Professional event coverage showcasing innovation and technology</p></div></div><div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg scroll-trigger hover:shadow-2xl transition-shadow"><video class="w-full h-64 object-cover" controls><source src="assets/A04R.mp4" type="video/mp4">Your browser does not support the video tag.</video><div class="p-6"><h3 class="text-xl font-bold text-gray-800">Premium Production Video</h3><p class="text-gray-600 mt-2">High-quality cinematic work featuring our latest productions</p></div></div><div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg scroll-trigger hover:shadow-2xl transition-shadow"><video class="w-full h-64 object-cover" controls><source src="assets/events/Google-For-Startups-Accelerator-Dubai_Media_UqcGv2Dw0tI_001_1080p.mp4" type="video/mp4">Your browser does not support the video tag.</video><div class="p-6"><h3 class="text-xl font-bold text-gray-800">Google for Startups Accelerator Dubai</h3><p class="text-gray-600 mt-2">Documentation of the accelerator program and startup showcases</p></div></div><div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg scroll-trigger hover:shadow-2xl transition-shadow"><video class="w-full h-64 object-cover" controls><source src="assets/events/IMG_3421.MP4" type="video/mp4">Your browser does not support the video tag.</video><div class="p-6"><h3 class="text-xl font-bold text-gray-800">Sports Capture</h3><p class="text-gray-600 mt-2">Dynamic sports action and athletic performance footage</p></div></div><div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg scroll-trigger hover:shadow-2xl transition-shadow"><video class="w-full h-64 object-cover" controls><source src="assets/events/mercedes-benz_eqs%20(1080p).mp4" type="video/mp4">Your browser does not support the video tag.</video><div class="p-6"><h3 class="text-xl font-bold text-gray-800">Mercedes‑Benz EQS Showcase</h3><p class="text-gray-600 mt-2">Cinematic showcase for Mercedes‑Benz EQS — product and lifestyle footage</p></div></div></div></div></section><div id="videoModal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4"><div class="bg-black rounded-lg w-full max-w-4xl"><div class="flex justify-between items-center p-4 border-b border-gray-700"><h3 class="text-white text-xl font-bold">Video Player</h3><button onclick="closeVideo()" class="text-gray-400 hover:text-white text-2xl"><i class="fas fa-times"></i></button></div><div class="relative" style="padding-bottom: 56.25%;"><iframe id="videoFrame" class="absolute inset-0 w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div></div><section id="about" class="py-20 bg-gray-50"><div class="container mx-auto px-6"><div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"><div class="scroll-trigger"><img src="assets/file_000000002964720caa0f1f92aa2c1e2e.png" alt="Photographer" class="rounded-lg shadow-xl"></div><div class="scroll-trigger"><h2 class="text-4xl md:text-5xl font-bold mb-6">My Creative Path</h2><p class="text-gray-700 text-lg mb-6">I'm Harikrishnan, a UAE-based travel filmmaker and visual storyteller. Through cinematic visuals, authentic moments, and emotion-driven narratives, I create films that capture the true essence of places and people.</p><h3 class="text-2xl font-bold mb-4">Services</h3><ul class="space-y-3 mb-8"><li class="flex items-center gap-3"><i class="fas fa-check text-blue-600 text-xl"></i> <span class="text-gray-700">Wedding & Engagement Photography</span></li><li class="flex items-center gap-3"><i class="fas fa-check text-blue-600 text-xl"></i> <span class="text-gray-700">Corporate & Event Coverage</span></li><li class="flex items-center gap-3"><i class="fas fa-check text-blue-600 text-xl"></i> <span class="text-gray-700">Professional Portraits & Headshots</span></li><li class="flex items-center gap-3"><i class="fas fa-check text-blue-600 text-xl"></i> <span class="text-gray-700">Sports & Action Photography</span></li><li class="flex items-center gap-3"><i class="fas fa-check text-blue-600 text-xl"></i> <span class="text-gray-700">Food & Product Photography</span></li><li class="flex items-center gap-3"><i class="fas fa-check text-blue-600 text-xl"></i> <span class="text-gray-700">Post-Processing & Photo Editing</span></li></ul><a href="#contact" class="btn-primary inline-block px-8 py-4 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700">Book a Session</a></div></div></div></section><section id="testimonials" class="py-20 bg-white"><div class="container mx-auto px-6"><h2 class="text-4xl md:text-5xl font-bold text-center mb-16 scroll-trigger">What Clients Say</h2><div class="relative"><div class="testimonial-carousel max-w-4xl mx-auto"><div class="testimonial-slide bg-gray-50 p-8 rounded-xl shadow-lg scroll-trigger"><div class="flex gap-1 mb-4"><i class="fas fa-star text-yellow-400"></i> <i class="fas fa-star text-yellow-400"></i> <i class="fas fa-star text-yellow-400"></i> <i class="fas fa-star text-yellow-400"></i> <i class="fas fa-star text-yellow-400"></i></div><p class="text-lg text-gray-700 mb-6 italic">"The photographer captured our wedding day perfectly! Every moment was preserved beautifully. Highly recommended!"</p><div class="flex items-center gap-4"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=50&h=50&fit=crop" alt="Client" class="w-12 h-12 rounded-full"><div><p class="font-bold text-gray-900">Sarah Johnson</p><p class="text-gray-600 text-sm">Bride</p></div></div></div><div class="testimonial-slide hidden bg-gray-50 p-8 rounded-xl shadow-lg scroll-trigger"><div class="flex gap-1 mb-4"><i class="fas fa-star text-yellow-400"></i> <i class="fas fa-star text-yellow-400"></i> <i class="fas fa-star text-yellow-400"></i> <i class="fas fa-star text-yellow-400"></i> <i class="fas fa-star text-yellow-400"></i></div><p class="text-lg text-gray-700 mb-6 italic">"Professional, creative, and a pleasure to work with. The corporate event coverage exceeded our expectations!"</p><div class="flex items-center gap-4"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop" alt="Client" class="w-12 h-12 rounded-full"><div><p class="font-bold text-gray-900">Michael Chen</p><p class="text-gray-600 text-sm">Event Organizer</p></div></div></div><div class="testimonial-slide hidden bg-gray-50 p-8 rounded-xl shadow-lg scroll-trigger"><div class="flex gap-1 mb-4"><i class="fas fa-star text-yellow-400"></i> <i class="fas fa-star text-yellow-400"></i> <i class="fas fa-star text-yellow-400"></i> <i class="fas fa-star text-yellow-400"></i> <i class="fas fa-star text-yellow-400"></i></div><p class="text-lg text-gray-700 mb-6 italic">"Outstanding portrait session! The photographer made us feel comfortable and the results are stunning!"</p><div class="flex items-center gap-4"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop" alt="Client" class="w-12 h-12 rounded-full"><div><p class="font-bold text-gray-900">Emily Martinez</p><p class="text-gray-600 text-sm">Family Client</p></div></div></div></div><div class="flex justify-center gap-4 mt-8"><button id="prevTestimonial" class="btn-primary p-3 bg-blue-600 text-white rounded-full hover:bg-blue-700"><i class="fas fa-chevron-left"></i></button> <button id="nextTestimonial" class="btn-primary p-3 bg-blue-600 text-white rounded-full hover:bg-blue-700"><i class="fas fa-chevron-right"></i></button></div></div></div></section><section id="contact" class="py-20 bg-gray-50"><div class="container mx-auto px-6"><h2 class="text-4xl md:text-5xl font-bold text-center mb-16 scroll-trigger">Get In Touch</h2><div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-12"><div class="bg-white p-8 rounded-xl shadow-lg text-center scroll-trigger hover:shadow-2xl transition-shadow"><div class="text-4xl text-blue-600 mb-4"><i class="fas fa-envelope"></i></div><h3 class="text-xl font-bold mb-2">Email</h3><a href="mailto:bluejaypictures767@gmail.com" class="text-gray-600 hover:text-blue-600 transition">bluejaypictures767@gmail.com</a></div><div class="bg-white p-8 rounded-xl shadow-lg text-center scroll-trigger hover:shadow-2xl transition-shadow"><div class="text-4xl text-blue-600 mb-4"><i class="fas fa-phone"></i></div><h3 class="text-xl font-bold mb-2">Phone</h3><a href="tel:+971 54 726 4342" class="text-gray-600 hover:text-blue-600 transition">+971 54 726 4342</a></div><div class="bg-white p-8 rounded-xl shadow-lg text-center scroll-trigger hover:shadow-2xl transition-shadow"><div class="text-4xl text-blue-600 mb-4"><i class="fab fa-whatsapp"></i></div><h3 class="text-xl font-bold mb-2">WhatsApp</h3><a href="https://wa.me/971547264342" target="_blank" class="text-gray-600 hover:text-blue-600 transition">+971 54 726 4342</a></div><div class="bg-white p-8 rounded-xl shadow-lg text-center scroll-trigger hover:shadow-2xl transition-shadow"><div class="text-4xl text-blue-600 mb-4"><i class="fas fa-map-marker-alt"></i></div><h3 class="text-xl font-bold mb-2">Location</h3><p class="text-gray-600">Available for travel 🇮🇳 INDIA, 🇦🇪 UAE , 🇰🇼 KUWAIT, 🇶🇦 QATAR</p></div></div><div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg scroll-trigger"><h3 class="text-2xl font-bold mb-6">Send me a Message</h3><form action="https://formspree.io/f/xvzrqgap" method="POST" class="space-y-6"><div><label class="block text-gray-700 font-semibold mb-2">Your Name</label> <input type="text" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600" placeholder="John Doe"></div><div><label class="block text-gray-700 font-semibold mb-2">Email Address</label> <input type="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600" placeholder="john@example.com"></div><div><label class="block text-gray-700 font-semibold mb-2">Phone Number</label> <input type="tel" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600" placeholder="+1 (234) 567-890"></div><div><label class="block text-gray-700 font-semibold mb-2">Service Type</label> <select name="service" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600"><option value="">Select a service</option><option value="event">Event Photography</option><option value="wedding">Wedding Photography</option><option value="portrait">Portrait Session</option><option value="corporate">Corporate Photography</option><option value="sports">Sports Photography</option><option value="other">Other</option></select></div><div><label class="block text-gray-700 font-semibold mb-2">Message</label> <textarea name="message" rows="6" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600" placeholder="Tell me about your project..."></textarea></div><button type="submit" class="btn-primary w-full py-4 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-colors">Send Message</button></form><p class="text-center text-gray-600 text-sm mt-4">Or email directly: <a href="mailto:bluejaypictures767@gmail.com" class="text-blue-600 font-semibold hover:underline">bluejaypictures767@gmail.com</a></p></div></div></section><footer class="bg-gray-900 text-white py-12"><div class="container mx-auto px-6"><div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8"><div><div class="flex items-center gap-2 mb-4"><img src="assets/IMG_4436.PNG" alt="Blue Jay Pictures Logo" class="brand-logo"></div><p class="text-gray-400">Professional photography for all occasions</p></div><div><h4 class="text-lg font-bold mb-4">Quick Links</h4><ul class="space-y-2"><li><a href="#hero" class="text-gray-400 hover:text-white transition">Home</a></li><li><a href="#portfolio" class="text-gray-400 hover:text-white transition">Portfolio</a></li><li><a href="#about" class="text-gray-400 hover:text-white transition">About</a></li><li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li></ul></div><div><h4 class="text-lg font-bold mb-4">Services</h4><ul class="space-y-2"><li><a href="#about" class="text-gray-400 hover:text-white transition">Event Coverage</a></li><li><a href="#about" class="text-gray-400 hover:text-white transition">Wedding Coverage</a></li><li><a href="#about" class="text-gray-400 hover:text-white transition">Portraits</a></li><li><a href="#about" class="text-gray-400 hover:text-white transition">Corporate</a></li></ul></div><div><h4 class="text-lg font-bold mb-4">Follow Me</h4><div class="flex gap-4"><a href="https://www.instagram.com/bluejay__pictures?igsh=MWNqcnl3Z2Z2Zmc5dg==" target="_blank" class="text-gray-400 hover:text-blue-400 transition text-2xl"><i class="fab fa-instagram"></i> </a><a href="https://wa.me/971547264342" target="_blank" class="text-gray-400 hover:text-green-500 transition text-2xl"><i class="fab fa-whatsapp"></i></a></div></div></div><div class="border-t border-gray-800 pt-8 text-center"><p class="text-gray-400">&copy; 2024 Blue Jay Pictures. All rights reserved. | Designed for Professional Photography</p></div></div></footer><script>// ============ CAROUSEL ============
+        const carouselImages = [
+            'https://images.unsplash.com/photo-1502914240471-18149d7df7af?w=1200&h=800&fit=crop',
+            'https://images.unsplash.com/photo-1519167271335-cd17ce0accdf?w=1200&h=800&fit=crop',
+            'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1200&h=800&fit=crop',
+            'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1200&h=800&fit=crop'
+        ];
+
+        let currentSlide = 0;
+
+        function updateCarousel() {
+            const img = document.getElementById('carouselImg');
+            img.style.animation = 'none';
+            setTimeout(() => {
+                img.src = carouselImages[currentSlide];
+                img.style.animation = 'fadeInUp 1s ease-in-out';
+            }, 50);
+
+            // Update dots
+            document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.remove('opacity-50');
+                } else {
+                    dot.classList.add('opacity-50');
+                }
+            });
+        }
+
+        document.querySelectorAll('.carousel-dot').forEach(dot => {
+            dot.addEventListener('click', () => {
+                currentSlide = parseInt(dot.dataset.slide);
+                updateCarousel();
+            });
+        });
+
+        // Auto-rotate carousel every 5 seconds
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % carouselImages.length;
+            updateCarousel();
+        }, 5000);
+
+        // Theme toggle removed per user request
+
+        // ============ MOBILE MENU ============
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close menu when link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // ============ PORTFOLIO FILTER ============
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const subcategoryCards = document.querySelectorAll('.subcategory-card');
+        const portfolioSubCategories = document.getElementById('portfolioSubCategories');
+        const portfolioPhotos = document.getElementById('portfolioPhotos');
+        const backButton = document.getElementById('backButton');
+        const photoItems = document.querySelectorAll('.photo-item');
+
+        // Show only Events sub-categories by default on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            // Show sub-categories for Events
+            portfolioSubCategories.classList.remove('hidden');
+            portfolioPhotos.classList.add('hidden');
+            backButton.classList.add('hidden');
+        });
+
+        // Filter buttons
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-blue-600', 'text-white');
+                    b.classList.add('bg-white', 'text-gray-800', 'border-2', 'border-blue-600');
+                });
+                btn.classList.remove('bg-white', 'text-gray-800', 'border-2', 'border-blue-600');
+                btn.classList.add('bg-blue-600', 'text-white');
+
+                const filter = btn.dataset.filter;
+
+                // If Events  - show sub-categories
+                if (filter === 'events') {
+                    portfolioSubCategories.classList.remove('hidden');
+                    portfolioPhotos.classList.add('hidden');
+                    backButton.classList.add('hidden');
+                } else {
+                    // For other categories - show photos directly
+                    portfolioSubCategories.classList.add('hidden');
+                    portfolioPhotos.classList.remove('hidden');
+                    backButton.classList.add('hidden');
+
+                    // Filter photos based on category
+                    photoItems.forEach(photo => {
+                        photo.classList.contains(`portfolio-item-${filter}`)
+                            ? photo.style.display = 'block'
+                            : photo.style.display = 'none';
+                    });
+                }
+            });
+        });
+
+        // Sub-category cards click - show photos (only for Events)
+        subcategoryCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const subcategory = card.dataset.subcategory;
+                
+                // Hide sub-categories, show photos section
+                portfolioSubCategories.classList.add('hidden');
+                portfolioPhotos.classList.remove('hidden');
+                backButton.classList.remove('hidden');
+
+                // Filter photos based on sub-category
+                photoItems.forEach(photo => {
+                    photo.classList.contains(`photo-${subcategory}`)
+                        ? photo.style.display = 'block'
+                        : photo.style.display = 'none';
+                });
+
+                // Scroll to photos section
+                portfolioPhotos.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Back button - return to Events sub-categories
+        backButton.addEventListener('click', () => {
+            portfolioSubCategories.classList.remove('hidden');
+            portfolioPhotos.classList.add('hidden');
+            backButton.classList.add('hidden');
+
+            // Scroll to portfolio section
+            document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        // ============ VIDEO MODAL ============
+        function playVideo(videoSrc) {
+            const modal = document.getElementById('videoModal');
+            const frame = document.getElementById('videoFrame');
+            frame.src = videoSrc + '?autoplay=1';
+            modal.classList.remove('hidden');
+        }
+
+        function closeVideo() {
+            const modal = document.getElementById('videoModal');
+            const frame = document.getElementById('videoFrame');
+            frame.src = '';
+            modal.classList.add('hidden');
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeVideo();
+        });
+
+        // ============ TESTIMONIALS CAROUSEL ============
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial-slide');
+
+        function showTestimonial(index) {
+            testimonials.forEach(t => t.classList.add('hidden'));
+            testimonials[index].classList.remove('hidden');
+        }
+
+        document.getElementById('prevTestimonial').addEventListener('click', () => {
+            currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        });
+
+        document.getElementById('nextTestimonial').addEventListener('click', () => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        });
+
+        // Auto-rotate testimonials
+        setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }, 6000);
+
+        // ============ COUNTER ANIMATION ============
+        function animateCounter(element, target) {
+            const countEl = element.querySelector('.count') || element;
+            let current = 0;
+            const increment = Math.max(1, Math.floor(target / 60));
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    countEl.textContent = target;
+                    clearInterval(timer);
+                    countEl.classList.add('animate-counter');
+                    setTimeout(() => countEl.classList.remove('animate-counter'), 600);
+                } else {
+                    countEl.textContent = Math.floor(current);
+                    // small pop animation
+                    countEl.classList.add('animate-counter');
+                    setTimeout(() => countEl.classList.remove('animate-counter'), 160);
+                }
+            }, 30);
+        }
+
+        // ============ SCROLL ANIMATIONS ============
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+
+                    // Trigger counter animation for stats
+                    const counterEl = entry.target.querySelector('.counter');
+                    if (counterEl) {
+                        const target = parseInt(counterEl.dataset.target);
+                        animateCounter(counterEl, target);
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.scroll-trigger').forEach(el => observer.observe(el));
+
+        // ============ SMOOTH SCROLL ============
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ============ NAVBAR SCROLL EFFECT ============
+        const navbar = document.getElementById('navbar');
+        const hero = document.getElementById('hero');
+
+        function updateNavbarOnScroll() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const navbarHeight = navbar.offsetHeight || 70;
+            const threshold = (hero ? hero.offsetHeight : 300) - navbarHeight - 20;
+
+            if (scrollTop > threshold) {
+                navbar.classList.remove('absolute', 'bg-transparent');
+                navbar.classList.add('fixed', 'top-0', 'left-0', 'right-0', 'bg-white', 'shadow-lg');
+                document.body.style.paddingTop = navbarHeight + 'px';
+            } else {
+                navbar.classList.remove('fixed', 'top-0', 'left-0', 'right-0', 'bg-white', 'shadow-lg');
+                navbar.classList.add('absolute', 'top-0', 'left-0', 'right-0', 'bg-transparent');
+                document.body.style.paddingTop = '0';
+            }
+        }
+
+        window.addEventListener('scroll', updateNavbarOnScroll);
+        window.addEventListener('load', updateNavbarOnScroll);
+        window.addEventListener('resize', updateNavbarOnScroll);</script><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script><script>// Configure Lightbox2
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'albumLabel': 'Image %1 of %2',
+            'fadeDuration': 300,
+            'imageFadeDuration': 300
+        });</script></body></html>

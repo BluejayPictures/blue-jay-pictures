@@ -1,0 +1,1 @@
+console.log("Blue Jay Pictures portfolio loaded");
